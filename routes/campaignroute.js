@@ -81,3 +81,9 @@ campaign.get("/campaign/:title", async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+
+campaign.get('/category/:category', async (req, res) => {
+  const { category } = req.params;
+  const campaigns = await Campaign.find({ Category: category });
+  res.json(campaigns);
+});
