@@ -1,14 +1,24 @@
-import { Schema } from "mongoose";
-import { model } from "mongoose";
+import mongoose from "mongoose";
 
-const campaignSchema = new Schema({
-    Title: { type: String, unique: true },
-    Category: String,
-    Goal: Number,
-    Raised: Number,
-    Status: String
+const campaignSchema = new mongoose.Schema({
+  Title: { type: String, required: true },
+  Description: String,
+  Category: String,
+  Goal: Number,
+  Raised: { type: Number, default: 0 },
+
+  Image: String, // Base64 image
+
+  Status: {
+    type: String,
+    enum: [ "Active", "Closed"],
+    default: "Active"
+  },
+
+  CreatedAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-const Campaign = model("Campaign", campaignSchema);
-
-export default Campaign;
+export const Campaign = mongoose.model("Campaign", campaignSchema);

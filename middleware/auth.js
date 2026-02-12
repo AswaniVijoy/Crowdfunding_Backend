@@ -34,4 +34,15 @@ function authenticate(req, res, next) {
     }
 }
 
-export { authenticate }
+function isAdmin(req, res, next) {
+    if (req.role == 'Admin') {
+        next();
+    }
+    else {
+        res.status(401).json({ msg: "Unauthorized Access,Only Admin Access" })
+    }
+}
+
+
+
+export { authenticate,isAdmin }

@@ -1,13 +1,13 @@
-import { Schema } from "mongoose";
-import { model } from "mongoose";
+import mongoose from "mongoose";
 
-const donationSchema = new Schema({
-    Donar: String,
-    Campaign: String,
-    Amount: Number,
-    Date: Date
+const donationSchema = new mongoose.Schema({
+  Donar: String,
+  CampaignTitle: String,
+  Amount: Number,
+  Date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-const Donation = model("Donation", donationSchema);
-
-export default Donation;
+export const Donation = mongoose.model("Donation", donationSchema);
